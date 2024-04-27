@@ -2,10 +2,3 @@ pyenv
 rust
 google-cloud-sdk
 neovim
-bat
-exa
-fd
-procs
-sd
-dust
-ripgrep
