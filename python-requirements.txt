@@ -1,5 +1,7 @@
 ipython
 jupyterlab
 black
-"black[jupyter]"
+black[jupyter]
+isort
+flake8
 pytest

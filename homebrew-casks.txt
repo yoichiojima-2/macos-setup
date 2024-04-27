@@ -1,5 +1,6 @@
 iterm2
 visual-studio-code
+docker
 soundtoys
 ilok-license-manager
 waves-central
