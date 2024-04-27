@@ -1,6 +1,8 @@
 iterm2
 visual-studio-code
 docker
+spotify
+splice
 soundtoys
 ilok-license-manager
 waves-central
