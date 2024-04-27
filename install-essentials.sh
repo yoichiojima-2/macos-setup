@@ -12,38 +12,18 @@ install_oh_my_zsh(){
 
 
 install_formulae(){
-    casks=(
-        "pyenv"
-        "rust"
-        "google-cloud-sdk"
-        "neovim"
-        "bat"
-        "exa"
-        "fd"
-        "procs"
-        "sd"
-        "dust"
-        "ripgrep"
-    )
-    for i in "${casks[@]}"; do
-        echo "Installing ${i}"
-        brew install $i
-    done
+    while read -r formula; do
+        echo "Installing ${formula}"
+        brew install ${formula}
+    done < homebrew-formulae.txt
 }
 
 
 install_casks(){
-    casks=(
-        "iterm2"
-        "visual-studio-code"
-        "soundtoys"
-        "ilok-license-manager"
-        "waves-central"
-    )
-    for i in "${casks[@]}"; do
-        echo "Installing ${i}"
-        brew install --cask $i
-    done
+    while read -r cask; do
+        echo "Installing ${cask}"
+        brew install --cask ${cask}
+    done < homebrew-casks.txt
 }
 
 overwrite_zshrc(){
@@ -52,7 +32,7 @@ overwrite_zshrc(){
 }
 
 
-overwrite_zshrc(){
+overwrite_vimrc(){
     cp vimrc ~/.vimrc
     echo "vimrc is overwritten"
 }
@@ -63,3 +43,4 @@ install_oh_my_zsh
 install_formulae
 install_casks
 overwrite_zshrc
+overwrite_vimrc

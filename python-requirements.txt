@@ -1,0 +1,5 @@
+ipython
+jupyterlab
+black
+"black[jupyter]"
+pytest

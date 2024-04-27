@@ -14,19 +14,8 @@ install_python_libraries(){
     python -m venv ~/python-venv/general-purpose
     source ~/python-venv/general-purpose
 
-    libs=(
-        "ipython"
-        "jupyterlab"
-        "black"
-        "black[jupyter]"
-        "pytest"
-    )
-
     pip install --upgrade pip
-
-    for i in "${libs[@]}"; do
-        pip3 install $i
-    done
+    pip install -r python-requirements.txt
 }
 
 install_python

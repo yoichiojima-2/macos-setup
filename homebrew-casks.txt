@@ -1,0 +1,5 @@
+iterm2
+visual-studio-code
+soundtoys
+ilok-license-manager
+waves-central
