@@ -6,3 +6,4 @@ focusrite-control
 ilok-license-manager
 waves-central
 daisydisk
+logi-options-plus
