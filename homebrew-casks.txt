@@ -4,6 +4,7 @@ docker
 spotify
 splice
 soundtoys
+focusrite-control
 ilok-license-manager
 waves-central
 daisydisk
