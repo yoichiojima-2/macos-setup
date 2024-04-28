@@ -1,0 +1,10 @@
+python:latest
+rust:latest
+node:latest
+ruby:latest
+golang:latest
+postgres:latest
+jupyter/datascience-notebook:latest
+ubuntu:latest
+alpine:latest
+nginx:latest

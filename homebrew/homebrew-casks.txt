@@ -1,5 +1,4 @@
 iterm2
-docker
 spotify
 splice
 soundtoys
