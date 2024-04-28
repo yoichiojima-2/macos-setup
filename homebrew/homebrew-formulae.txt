@@ -2,3 +2,4 @@ pyenv
 rust
 google-cloud-sdk
 neovim
+tree
