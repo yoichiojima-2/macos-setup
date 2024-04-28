@@ -6,3 +6,4 @@ splice
 soundtoys
 ilok-license-manager
 waves-central
+daisydisk
