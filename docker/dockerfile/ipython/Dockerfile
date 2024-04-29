@@ -1,4 +1,10 @@
 FROM python:latest
 
-RUN pip install --upgrade pip ipython
+COPY requirements.txt /tmp/requirements.txt
+
+RUN pip install --upgrade pip
+RUN pip install -r /tmp/requirements.txt
+
+WORKDIR /home
+
 CMD ["ipython"]
