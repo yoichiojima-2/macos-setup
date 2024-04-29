@@ -1,4 +1,3 @@
 pyenv
-rust
 google-cloud-sdk
 tree
