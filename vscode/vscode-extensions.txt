@@ -12,3 +12,4 @@ ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 vscode-icons-team.vscode-icons
 vscodevim.vim
+github.github-vscode-theme
