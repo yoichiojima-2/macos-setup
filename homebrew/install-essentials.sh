@@ -32,15 +32,8 @@ overwrite_zshrc(){
 }
 
 
-overwrite_vimrc(){
-    cp vimrc ~/.vimrc
-    echo "vimrc is overwritten"
-}
-
-
 install_homebrew
 install_oh_my_zsh
 install_formulae
 install_casks
 overwrite_zshrc
-overwrite_vimrc
