@@ -94,7 +94,7 @@ if [[ ":$PATH:" != *":$HOME/Developer/repo/openai-rust/target/release:"* ]]; the
 fi
 
 # read .env
-[ -s $HOME/env.sh ] && source $HOME/.env.sh
+[ -s $HOME/.env.sh ] && source $HOME/.env.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -117,5 +117,6 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
- 
+alias vi="nvim"
+alias vim="nvim"
+alias cat="bat"
