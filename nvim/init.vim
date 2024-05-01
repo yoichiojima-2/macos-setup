@@ -1,4 +1,5 @@
 syntax enable
+
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -9,6 +10,7 @@ filetype plugin indent on
 call plug#begin('~/.vim/plugged')
 Plug 'github/copilot.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 
-colorscheme github-dimmed
+colorscheme material
