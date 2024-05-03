@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd homebrew && bash install-essentials.sh && cd ..
-cd python && bash install-python.sh && cd ..
-cd node && bash install-node.sh && cd ..
-cd nvim && bash install-nvim.sh && cd ..
-cd vscode & bash install-vscode.sh && cd .. 
-cd docker && bash install-docker-images.sh && cd ..
+cd homebrew && $SHELL install-essentials.sh && cd ..
+cd python && $SHELL install-python.sh && cd ..
+cd node && $SHELL install-node.sh && cd ..
+cd nvim && $SHELL install-nvim.sh && cd ..
+cd vscode & $SHELL install-vscode.sh && cd .. 
+cd docker && $SHELL install-docker-images.sh && cd ..

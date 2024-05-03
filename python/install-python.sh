@@ -12,7 +12,7 @@ install_python(){
 
 install_python_libraries(){
     python -m venv ~/python-venv/general-purpose
-    source ~/python-venv/general-purpose
+    source ~/python-venv/general-purpose/bin/activate
 
     pip install --upgrade pip
     pip install -r python-requirements.txt
