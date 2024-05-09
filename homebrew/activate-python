@@ -1,0 +1,5 @@
+activate_python() {
+    source ~/python-venv/general-purpose/bin/activate
+}
+
+activate_python

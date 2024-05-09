@@ -15,7 +15,7 @@ install_python_libraries(){
     source ~/python-venv/general-purpose/bin/activate
 
     pip install --upgrade pip
-    pip install -r python-requirements.txt
+    pip install -r requirements.txt
 }
 
 install_python
