@@ -10,5 +10,10 @@ install_formatter() {
     rustup component add rustfmt
 }
 
+install_evcxr() {
+    cargo install evcxr
+}
+
 install_rust
 install_formatter
+install_evcxr
