@@ -8,3 +8,4 @@ ilok-license-manager
 waves-central
 daisydisk
 logi-options-plus
+izotope-product-portal
