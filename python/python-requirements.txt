@@ -1,0 +1,17 @@
+ipython
+jupyterlab
+black
+black[jupyter]
+isort
+flake8
+pytest
+pandas
+matplotlib
+seaborn
+scikit-learn
+tensorflow-macos
+openai
+fastapi
+flask
+django
+poetry
