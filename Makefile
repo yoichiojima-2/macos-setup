@@ -1,7 +1,9 @@
 PYTHON_VENV = ~/python-venv/general-purpose
 PYTHON_VERSION = 3.12
 
+
 all: .brew/.installed zsh-env docker-env node-env vim-env python-env rust-env code-env
+
 
 .PHONY: .brew/.installed
 brew-env: .brew/.installed
