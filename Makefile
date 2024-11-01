@@ -5,7 +5,7 @@ PYTHON_VERSION = 3.12
 all: brew-env zsh-env docker-env node-env vim-env python-env rust-env code-env
 
 
-.PHONY: .brew/.installed
+.PHONY: brew-env
 brew-env: .brew/.installed
 brew/.installed:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
