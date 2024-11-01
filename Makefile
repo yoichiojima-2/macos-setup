@@ -41,8 +41,8 @@ vim-env: brew-env
 python-env: brew-env
 	pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
-	pip install --upgrade pip
 	python -m venv ${PYTHON_VENV}
+	${PYTHON_VENV}/bin/pip install --upgrade pip
 	${PYTHON_VENV}/bin/pip install --upgrade -r ./python/requirements.txt
 
 
