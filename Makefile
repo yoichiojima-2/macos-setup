@@ -1,33 +1,36 @@
 PYTHON_VENV = ~/python-venv/general-purpose
 PYTHON_VERSION = 3.12
 
-.PHONY: install-brew
-brew-env:
+all: .brew/.installed zsh-env docker-env node-env vim-env python-env rust-env code-env
+
+.PHONY: .brew/.installed
+brew-env: .brew/.installed
+brew/.installed:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	cat ./brew/brew-casks.txt | xargs brew install
-	cat ./brew/brew-formulae.txt | xargs brew install
+	cat ./brew/casks.txt | xargs brew install
+	cat ./brew/formulae.txt | xargs brew install
+	touch ./brew/.installed
 
 
 .PHONY: zsh-env
 zsh-env:
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	curl -fsSL -o ~/.zshrc https://github.com/yoichiojima-2/dotfiles/raw/refs/heads/main/.zshrc
 
 
 .PHONY: docker-env
-docker-env: install-brew
+docker-env: brew-env
 	brew install --cask docker
-	cat ./docker/docker-images.txt | while read -r line; do docker pull $line; done
+	cat ./docker/images.txt | while read -r line; do docker pull $$line; done
 
 
 .PHONY: node-env
-node-env: install-brew
-	mkdir -p ~/.nvm
+node-env: brew-env
 	. ~/.nvm/nvm.sh && nvm install node
 
 
 .PHONY: vim-env
-vim-env: install-brew
+vim-env: brew-env
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/refs/heads/main/init.vim
 
@@ -38,7 +41,7 @@ python-env: brew-env
 	pyenv global ${PYTHON_VERSION}
 	pip install --upgrade pip
 	python -m venv ${PYTHON_VENV}
-	${PYTHON_VENV}/bin/pip install --upgrade -r ./python/python-requirements.txt
+	${PYTHON_VENV}/bin/pip install --upgrade -r ./python/requirements.txt
 
 
 .PHONY: rust-env
@@ -49,12 +52,12 @@ rust-env: brew-env
 
 .PHONY: code-env
 code-env: brew-env
-	cat vscode-extensions.txt | xargs code --install-extension
+	cat ./code/extensions.txt | xargs code --install-extension
 
 
 .PHONY: upgrade-python
 upgrade-python:
-	${PYTHON_VENV}/bin/pip list | tail -n +3 | awk '{ print $1 }' | xargs pip install --upgrade
+	${PYTHON_VENV}/bin/pip list | tail -n +3 | awk '{ print $$1 }' | xargs ${PYTHON_VENV}/bin/pip install --upgrade
 
 
 .PHONY: upgrade-brew
