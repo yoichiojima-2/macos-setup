@@ -39,7 +39,7 @@ vim-env: brew-env
 
 .PHONY: python-env
 python-env: brew-env
-	pyenv install ${PYTHON_VERSION}
+	-pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
 	python -m venv ${PYTHON_VENV}
 	${PYTHON_VENV}/bin/pip install --upgrade pip
