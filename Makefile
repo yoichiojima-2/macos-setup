@@ -6,7 +6,7 @@ all: brew-env zsh-env docker-env node-env vim-env python-env rust-env code-env
 
 
 .PHONY: brew-env
-brew-env: .brew/.installed
+brew-env: brew/.installed
 brew/.installed:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	cat brew/casks.txt | xargs brew install
@@ -17,7 +17,7 @@ brew/.installed:
 .PHONY: zsh-env
 zsh-env:
 	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	curl -fsSL https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/.zshrc
+	curl -o ~/.zshrc -fsSL https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/.zshrc
 
 
 .PHONY: docker-env
@@ -34,7 +34,7 @@ node-env: brew-env
 .PHONY: vim-env
 vim-env: brew-env
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/refs/heads/main/init.vim
+	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim
 
 
 .PHONY: python-env
