@@ -9,21 +9,21 @@ all: brew-env zsh-env docker-env node-env vim-env python-env rust-env code-env
 brew-env: .brew/.installed
 brew/.installed:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	cat ./brew/casks.txt | xargs brew install
-	cat ./brew/formulae.txt | xargs brew install
-	touch ./brew/.installed
+	cat brew/casks.txt | xargs brew install
+	cat brew/formulae.txt | xargs brew install
+	touch brew/.installed
 
 
 .PHONY: zsh-env
 zsh-env:
 	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	curl -fsSL -o ~/.zshrc https://github.com/yoichiojima-2/dotfiles/raw/refs/heads/main/.zshrc
+	curl -fsSL https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/.zshrc
 
 
 .PHONY: docker-env
 docker-env: brew-env
 	brew install --cask docker
-	cat ./docker/images.txt | while read -r line; do docker pull $$line; done
+	cat docker/images.txt | while read -r line; do docker pull $$line; done
 
 
 .PHONY: node-env
@@ -43,7 +43,7 @@ python-env: brew-env
 	pyenv global ${PYTHON_VERSION}
 	python -m venv ${PYTHON_VENV}
 	${PYTHON_VENV}/bin/pip install --upgrade pip
-	${PYTHON_VENV}/bin/pip install --upgrade -r ./python/requirements.txt
+	${PYTHON_VENV}/bin/pip install --upgrade -r python/requirements.txt
 
 
 .PHONY: rust-env
@@ -54,7 +54,7 @@ rust-env: brew-env
 
 .PHONY: code-env
 code-env: brew-env
-	cat ./code/extensions.txt | xargs code --install-extension
+	cat code/extensions.txt | xargs code --install-extension
 
 
 .PHONY: upgrade-python
