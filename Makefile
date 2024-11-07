@@ -23,7 +23,7 @@ zsh-env:
 .PHONY: docker-env
 docker-env: brew-env
 	brew install --cask docker
-	cat docker/images.txt | while read -r line; do docker pull $$line; done
+	-cat docker/images.txt | while read -r line; do docker pull $$line; done
 
 
 .PHONY: node-env
@@ -48,8 +48,8 @@ python-env: brew-env
 
 .PHONY: rust-env
 rust-env: brew-env
-	brew install rustup
-	rustup-init
+	brew install rustup-init
+	rustup-init -y
 
 
 .PHONY: code-env
