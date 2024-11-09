@@ -1,11 +1,9 @@
 ipython
+pickleshare
 jupyterlab
-black
-black[jupyter]
-isort
-flake8
-pytest
+
 pandas
+pyspark
 matplotlib
 seaborn
 scikit-learn
@@ -14,5 +12,6 @@ openai
 fastapi
 flask
 django
+
 poetry
-pickleshare
+ruff

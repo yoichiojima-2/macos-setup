@@ -1,5 +1,2 @@
-pyenv
-nvm
-nvim
 google-cloud-sdk
 tree

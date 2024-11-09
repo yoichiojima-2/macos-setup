@@ -28,17 +28,19 @@ docker-env: brew-env
 
 .PHONY: node-env
 node-env: brew-env
+	brew install nvm
 	. ~/.nvm/nvm.sh && nvm install node
 
 
 .PHONY: vim-env
 vim-env: brew-env
+	brew install nvim
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim
 
-
 .PHONY: python-env
 python-env: brew-env
+	brew install pyenv
 	-pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
 	python -m venv ${PYTHON_VENV}
@@ -50,6 +52,11 @@ python-env: brew-env
 rust-env: brew-env
 	brew install rustup-init
 	rustup-init -y
+
+
+.PHONY: java-env
+java-env: brew-env
+	sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 
 
 .PHONY: code-env
