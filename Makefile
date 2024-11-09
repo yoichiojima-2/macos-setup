@@ -2,7 +2,13 @@ PYTHON_VENV = ~/python-venv/general-purpose
 PYTHON_VERSION = 3.12
 
 
-all: brew-env zsh-env docker-env node-env vim-env python-env rust-env code-env
+all: zsh-env brew-env vim-env code-env docker-env node-env python-env rust-env java-env
+
+
+.PHONY: zsh-env
+zsh-env:
+	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	curl -o ~/.zshrc -fsSL https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/.zshrc
 
 
 .PHONY: brew-env
@@ -14,10 +20,16 @@ brew/.installed:
 	touch brew/.installed
 
 
-.PHONY: zsh-env
-zsh-env:
-	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	curl -o ~/.zshrc -fsSL https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/.zshrc
+.PHONY: vim-env
+vim-env: brew-env
+	brew install nvim
+	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim
+
+
+.PHONY: code-env
+code-env: brew-env
+	cat code/extensions.txt | xargs code --install-extension
 
 
 .PHONY: docker-env
@@ -30,13 +42,6 @@ docker-env: brew-env
 node-env: brew-env
 	brew install nvm
 	. ~/.nvm/nvm.sh && nvm install node
-
-
-.PHONY: vim-env
-vim-env: brew-env
-	brew install nvim
-	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim
 
 .PHONY: python-env
 python-env: brew-env
@@ -56,12 +61,9 @@ rust-env: brew-env
 
 .PHONY: java-env
 java-env: brew-env
+	brew install openjdk
 	sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-
-
-.PHONY: code-env
-code-env: brew-env
-	cat code/extensions.txt | xargs code --install-extension
+	brew install hadoop
 
 
 .PHONY: upgrade-python
