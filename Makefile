@@ -29,6 +29,7 @@ vim-env: brew-env
 
 .PHONY: code-env
 code-env: brew-env
+	brew install visual-studio-code
 	cat code/extensions.txt | xargs code --install-extension
 
 
@@ -80,3 +81,10 @@ upgrade-brew:
 
 .PHONY: upgrade
 upgrade: upgrade-python upgrade-brew
+
+
+.PHONY: cleanup
+cleanup:
+	brew cleanup
+	docker ps -aq | xargs docker rm
+	docker images -q | xargs docker rmi
