@@ -85,6 +85,7 @@ upgrade: upgrade-python upgrade-brew
 
 .PHONY: cleanup
 cleanup:
+	rm ./brew/.installed
 	brew cleanup
 	docker ps -aq | xargs docker rm
 	docker images -q | xargs docker rmi
