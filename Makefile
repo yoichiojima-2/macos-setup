@@ -1,5 +1,5 @@
 PYTHON_VENV = ~/python-venv/general-purpose
-PYTHON_VERSION = 3.12
+PYTHON_VERSION = 3.13
 
 
 all: zsh-env brew-env vim-env code-env docker-env node-env python-env rust-env java-env
@@ -46,7 +46,7 @@ node-env: brew-env
 
 .PHONY: python-env
 python-env: brew-env
-	brew install pyenv ruff pytest poetry
+	brew install pyenv ruff pytest poetry ipython
 	-pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
 	python -m venv ${PYTHON_VENV}
