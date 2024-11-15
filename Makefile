@@ -49,9 +49,6 @@ python-env: brew-env
 	brew install pyenv ruff pytest poetry ipython
 	-pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
-	python -m venv ${PYTHON_VENV}
-	${PYTHON_VENV}/bin/pip install --upgrade pip
-	${PYTHON_VENV}/bin/pip install --upgrade -r python/general-purpose-requirements.txt
 
 
 .PHONY: rust-env
