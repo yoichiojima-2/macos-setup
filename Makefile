@@ -64,11 +64,6 @@ java-env: brew-env
 	brew install hadoop
 
 
-.PHONY: upgrade-python
-upgrade-python:
-	${PYTHON_VENV}/bin/pip list | tail -n +3 | awk '{ print $$1 }' | xargs ${PYTHON_VENV}/bin/pip install --upgrade
-
-
 .PHONY: upgrade-brew
 upgrade-brew:
 	brew update
@@ -77,7 +72,8 @@ upgrade-brew:
 
 
 .PHONY: upgrade
-upgrade: upgrade-python upgrade-brew
+upgrade: upgrade-brew
+	gcloud components update
 
 
 .PHONY: clean
