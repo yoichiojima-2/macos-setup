@@ -2,7 +2,7 @@ PYTHON_VENV = ~/python-venv/general-purpose
 PYTHON_VERSION = 3.13
 
 
-all: zsh-env brew-env vim-env code-env docker-env node-env python-env rust-env java-env
+all: zsh-env brew-env vim-env code-env docker-env node-env python-env rust-env java-env sql-env
 
 
 .PHONY: zsh-env
@@ -62,6 +62,11 @@ java-env: brew-env
 	brew install openjdk
 	sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 	brew install hadoop
+
+
+.PHONY: sql-env
+sql-env:
+	brew install postgresql@14
 
 
 .PHONY: upgrade-brew
