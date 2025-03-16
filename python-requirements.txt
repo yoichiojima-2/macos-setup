@@ -1,17 +1,26 @@
+# dev
 ipython
 pickleshare
 jupyterlab
+uv
+ruff
+python-dotenv
 
+# ds
+polars
 pandas
 pyspark
 matplotlib
 seaborn
-scikit-learn
-tensorflow-macos
+
+# llm
 openai
+langchain
+langgraph
+
+# web
 fastapi
 flask
 django
-
-poetry
-ruff
+bs4
+playwright

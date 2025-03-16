@@ -1,7 +1,6 @@
 google-chrome
 chatgpt
 cursor
-docker
 iterm2
 spotify
 splice

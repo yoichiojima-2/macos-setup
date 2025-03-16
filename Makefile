@@ -2,7 +2,7 @@ PYTHON_VENV = ~/.python-general-purpose
 PYTHON_VERSION = 3.13
 
 
-all: zsh brew vim code docker node python rust java sql
+all: zsh brew vi code docker node python rust java sql
 
 
 
@@ -18,7 +18,6 @@ brew/.installed:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	cat brew-casks.txt | xargs brew install
 	cat brew-formulae.txt | xargs brew install
-	touch brew/.installed
 
 
 .PHONY: vi
@@ -50,7 +49,9 @@ python: brew
 	brew install pyenv
 	-pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
-	pip install -r python-requirements.txt
+	python -m venv ${PYTHON_VENV}
+	${PYTHON_VENV}/bin/pip install --upgrade pip
+	${PYTHON_VENV}/bin/pip install -r python-requirements.txt
 
 
 .PHONY: rust

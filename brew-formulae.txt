@@ -3,3 +3,4 @@ nvm
 nvim
 google-cloud-sdk
 tree
+bat
