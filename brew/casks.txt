@@ -1,4 +1,7 @@
 google-chrome
+chatgot
+cursor
+code
 iterm2
 spotify
 splice
