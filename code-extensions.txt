@@ -13,3 +13,4 @@ ms-toolsai.vscode-jupyter-slideshow
 vscode-icons-team.vscode-icons
 vscodevim.vim
 github.github-vscode-theme
+equinusocio.vsc-material-theme

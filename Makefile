@@ -30,7 +30,7 @@ vi: brew
 .PHONY: code
 code: brew
 	brew install visual-studio-code
-	cat code-extensions.txt | xargs code --install-extension
+	cat code-extensions.txt | xargs -I {} code --install-extension {} --force
 
 
 .PHONY: docker

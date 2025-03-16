@@ -2,5 +2,6 @@ visual-studio-code
 nvm
 nvim
 google-cloud-sdk
+ollama
 tree
 bat
