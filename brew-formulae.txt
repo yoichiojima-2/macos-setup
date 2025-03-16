@@ -1,0 +1,5 @@
+visual-studio-code
+nvm
+nvim
+google-cloud-sdk
+tree
