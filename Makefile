@@ -25,6 +25,7 @@ vi: brew
 	brew install nvim
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim
+	nvim +PlugInstall +qall
 
 
 .PHONY: code
