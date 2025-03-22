@@ -3,5 +3,6 @@ nvm
 nvim
 google-cloud-sdk
 ollama
+gh
 tree
 bat
