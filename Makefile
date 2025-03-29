@@ -74,11 +74,12 @@ sql:
 
 
 .PHONY: upgrade
-upgrade: upgrade-brew
+upgrade:
 	brew update
 	brew upgrade
 	brew upgrade --cask
 	gcloud components update
+	pip install --upgrade pip
 
 
 .PHONY: clean
