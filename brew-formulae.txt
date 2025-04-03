@@ -6,3 +6,5 @@ ollama
 gh
 tree
 bat
+eza
+fd
