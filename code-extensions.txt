@@ -14,3 +14,4 @@ ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 golang.go
 ms-azuretools.vscode-docker
+saoudrizwan.claude-dev

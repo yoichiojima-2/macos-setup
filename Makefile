@@ -16,8 +16,8 @@ zsh:
 brew: brew/.installed
 brew/.installed:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	cat brew-casks.txt | xargs brew install
-	cat brew-formulae.txt | xargs brew install
+	cat brew-casks.txt | xargs brew install --force
+	cat brew-formulae.txt | xargs brew install --force
 
 
 .PHONY: vi
