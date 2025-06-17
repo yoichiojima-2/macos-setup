@@ -2,7 +2,7 @@ PYTHON_VENV = ~/.python-general-purpose
 PYTHON_VERSION = 3.13
 
 
-all: zsh brew vi code docker node python rust java sql
+all: zsh vi code docker node python rust java sql container
 
 
 
@@ -36,20 +36,27 @@ code: brew
 
 .PHONY: docker
 docker: brew
-	brew install --cask docker
 	-cat docker-images.txt | while read -r line; do docker pull $$line; done
 
+.PHONY: container
+container: brew
+	-cat containers.txt | while read -r line; do container images pull $$line; done
 
 .PHONY: node
 node: brew
 	brew install nvm
 	. ~/.nvm/nvm.sh && nvm install node
+	npm update
+	npm upgrade
+	-cat node-modules.txt | while read -r line; do npm install -g $$line; done
+
 
 .PHONY: python
 python: brew
 	brew install pyenv
 	-pyenv install ${PYTHON_VERSION}
 	pyenv global ${PYTHON_VERSION}
+	-rm ${PYTHON_VENV}
 	python -m venv ${PYTHON_VENV}
 	${PYTHON_VENV}/bin/pip install --upgrade pip
 	${PYTHON_VENV}/bin/pip install -r python-requirements.txt
