@@ -78,8 +78,8 @@ upgrade:
 	brew update
 	brew upgrade
 	brew upgrade --cask
-	gcloud components update
-	pip install --upgrade pip
+	yes | gcloud components update
+	yes | pip install --upgrade pip
 
 
 .PHONY: clean
