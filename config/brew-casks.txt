@@ -1,6 +1,10 @@
+docker
 google-chrome
+claude
+slack
 chatgpt
 cursor
+container
 iterm2
 spotify
 splice

@@ -1,97 +1,99 @@
-PYTHON_VENV = ~/.python-general-purpose
-PYTHON_VERSION = 3.13
+# macOS Development Environment Setup
+# Usage: make [target]
 
+SHELL := /bin/bash
+.DEFAULT_GOAL := help
 
-all: zsh vi code docker node python rust java sql container
+# Make all scripts executable
+$(shell chmod +x scripts/*.sh)
 
+# Environment variables
+export PYTHON_VENV := ~/Developer/.venv
+export PYTHON_VERSION := 3.13
 
+.PHONY: help
+help:
+	@echo "macOS Development Environment Setup"
+	@echo ""
+	@echo "Usage:"
+	@echo "  make all        - Complete setup (installs everything)"
+	@echo "  make brew       - Install Homebrew and packages"
+	@echo "  make zsh        - Install Oh My Zsh and custom config"
+	@echo "  make vi         - Install Neovim with plugins"
+	@echo "  make code       - Install VS Code and extensions"
+	@echo "  make python     - Install Python ${PYTHON_VERSION} with pyenv"
+	@echo "  make node       - Install Node.js with nvm"
+	@echo "  make docker     - Pull Docker/container images"
+	@echo "  make languages  - Install Rust, Java, and SQL tools"
+	@echo "  make upgrade    - Upgrade all installed packages"
+	@echo "  make clean      - Clean temporary files and Docker"
+	@echo "  make verify     - Verify installation status"
+
+.PHONY: all
+all: brew zsh vi code python node docker languages
+	@echo "✨ Setup complete!"
+
+.PHONY: brew
+brew:
+	@scripts/install-homebrew.sh
 
 .PHONY: zsh
 zsh:
-	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	curl -o ~/.zshrc -fsSL https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/zshrc
-
-
-.PHONY: brew
-brew: brew/.installed
-brew/.installed:
-	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	cat brew-casks.txt | xargs brew install --force
-	cat brew-formulae.txt | xargs brew install --force
-
+	@scripts/install-zsh.sh
 
 .PHONY: vi
 vi: brew
-	brew install nvim
-	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	curl -fsSL -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim
-	nvim +PlugInstall +qall
-
+	@scripts/install-neovim.sh
 
 .PHONY: code
 code: brew
-	brew install visual-studio-code
-	cat code-extensions.txt | xargs -I {} code --install-extension {} --force
-
-
-.PHONY: docker
-docker: brew
-	-cat docker-images.txt | while read -r line; do docker pull $$line; done
-
-.PHONY: container
-container: brew
-	-cat containers.txt | while read -r line; do container images pull $$line; done
-
-.PHONY: node
-node: brew
-	brew install nvm
-	. ~/.nvm/nvm.sh && nvm install node
-	npm update
-	npm upgrade
-	-cat node-modules.txt | while read -r line; do npm install -g $$line; done
-
+	@scripts/install-vscode.sh
 
 .PHONY: python
 python: brew
-	brew install pyenv
-	-pyenv install ${PYTHON_VERSION}
-	pyenv global ${PYTHON_VERSION}
-	-rm ${PYTHON_VENV}
-	python -m venv ${PYTHON_VENV}
-	${PYTHON_VENV}/bin/pip install --upgrade pip
-	${PYTHON_VENV}/bin/pip install -r python-requirements.txt
+	@scripts/install-python.sh
 
+.PHONY: node
+node: brew
+	@scripts/install-node.sh
+
+.PHONY: docker
+docker: brew
+	@scripts/install-docker.sh
+
+.PHONY: languages
+languages: brew
+	@scripts/install-languages.sh all
 
 .PHONY: rust
 rust: brew
-	brew install rustup-init
-	rustup-init -y
-
+	@scripts/install-languages.sh rust
 
 .PHONY: java
 java: brew
-	brew install openjdk
-	sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
-	brew install hadoop
-
+	@scripts/install-languages.sh java
 
 .PHONY: sql
-sql:
-	brew install postgresql@14
-
+sql: brew
+	@scripts/install-languages.sh sql
 
 .PHONY: upgrade
 upgrade:
-	brew update
-	brew upgrade
-	brew upgrade --cask
-	yes | gcloud components update
-	yes | pip install --upgrade pip
-
+	@scripts/upgrade.sh
 
 .PHONY: clean
 clean:
-	-rm ./brew/.installed
-	brew cleanup
-	docker ps -aq | xargs docker rm
-	docker images -q | xargs docker rmi
+	@scripts/clean.sh all
+
+.PHONY: verify
+verify:
+	@scripts/verify.sh
+
+.PHONY: reset-test
+reset-test:
+	@echo "🧹 Cleaning up for end-to-end testing..."
+	@# Remove Python virtual environment
+	@if [[ -d "$(PYTHON_VENV)" ]]; then rm -rf "$(PYTHON_VENV)"; echo "Removed Python venv"; fi
+	@# Clean up any partial installations
+	@scripts/clean.sh all
+	@echo "✓ Reset complete - ready for testing"

@@ -1,6 +1,3 @@
-docker
-container
-visual-studio-code
 nvm
 nvim
 google-cloud-sdk
@@ -10,3 +7,4 @@ tree
 bat
 eza
 fd
+npm
