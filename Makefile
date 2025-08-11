@@ -7,9 +7,7 @@ SHELL := /bin/bash
 # Make all scripts executable
 $(shell chmod +x scripts/*.sh)
 
-# Environment variables
-export PYTHON_VENV := ~/Developer/.venv
-export PYTHON_VERSION := 3.13
+# Configuration is loaded by individual scripts via common.sh
 
 .PHONY: help
 help:
@@ -21,7 +19,7 @@ help:
 	@echo "  make zsh        - Install Oh My Zsh and custom config"
 	@echo "  make vi         - Install Neovim with plugins"
 	@echo "  make code       - Install VS Code and extensions"
-	@echo "  make python     - Install Python ${PYTHON_VERSION} with pyenv"
+	@echo "  make python     - Install Python 3.13 with pyenv"
 	@echo "  make node       - Install Node.js with nvm"
 	@echo "  make docker     - Pull Docker/container images"
 	@echo "  make languages  - Install Rust, Java, and SQL tools"

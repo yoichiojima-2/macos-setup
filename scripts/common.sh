@@ -2,8 +2,19 @@
 
 set -euo pipefail
 
-export PYTHON_VENV="${HOME}/Developer/.venv"
-export PYTHON_VERSION="3.13"
+# Load configuration settings
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="${SCRIPT_DIR}/../config/settings.sh"
+
+if [[ -f "$CONFIG_FILE" ]]; then
+    source "$CONFIG_FILE"
+else
+    # Fallback values if config file not found
+    export PYTHON_VENV="${PYTHON_VENV:-${HOME}/Developer/.venv}"
+    export PYTHON_VERSION="${PYTHON_VERSION:-3.13}"
+    export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+    export DOTFILES_DIR="${DOTFILES_DIR:-${HOME}/Developer/repo/dotfiles}"
+fi
 
 log() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] $*"

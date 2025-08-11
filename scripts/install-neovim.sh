@@ -28,8 +28,15 @@ install_vim_plug() {
 install_nvim_config() {
     log "Installing Neovim configuration..."
     ensure_dir "${HOME}/.config/nvim"
-    download_file "https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/init.vim" "${HOME}/.config/nvim/init.vim"
-    success "Neovim configuration installed"
+    dotfiles_dir="${HOME}/Developer/repo/dotfiles"
+    
+    if [[ -f "${dotfiles_dir}/init.vim" ]]; then
+        cp "${dotfiles_dir}/init.vim" "${HOME}/.config/nvim/init.vim"
+        success "Neovim configuration installed from local dotfiles"
+    else
+        error "init.vim not found in ${dotfiles_dir}"
+        return 1
+    fi
 }
 
 install_nvim_plugins() {

@@ -14,8 +14,15 @@ install_oh_my_zsh() {
 
 install_zshrc() {
     log "Installing custom .zshrc configuration..."
-    download_file "https://raw.githubusercontent.com/yoichiojima-2/dotfiles/main/zshrc" "${HOME}/.zshrc"
-    success "Custom .zshrc installed"
+    dotfiles_dir="${HOME}/Developer/repo/dotfiles"
+    
+    if [[ -f "${dotfiles_dir}/zshrc" ]]; then
+        cp "${dotfiles_dir}/zshrc" "${HOME}/.zshrc"
+        success "Custom .zshrc installed from local dotfiles"
+    else
+        error "zshrc not found in ${dotfiles_dir}"
+        return 1
+    fi
 }
 
 main() {
