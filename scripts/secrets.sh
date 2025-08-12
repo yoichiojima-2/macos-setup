@@ -88,9 +88,49 @@ secret_export() {
     fi
 }
 
+# Function to load secrets from .env file
+secrets_load_env() {
+    local env_file="${1:-.env}"
+    
+    if [[ ! -f "$env_file" ]]; then
+        echo "✗ .env file not found: $env_file" >&2
+        return 1
+    fi
+    
+    echo "Loading secrets from $env_file..."
+    local count=0
+    
+    while IFS='=' read -r key value; do
+        # Skip empty lines and comments
+        [[ -z "$key" || "$key" =~ ^[[:space:]]*# ]] && continue
+        
+        # Clean up key and value
+        key=$(echo "$key" | xargs)
+        value=$(echo "$value" | sed 's/^["'\'']//' | sed 's/["'\'']$//' | xargs)
+        
+        if [[ -n "$key" && -n "$value" ]]; then
+            secret_set "$key" "$value"
+            ((count++))
+        fi
+    done < "$env_file"
+    
+    echo "✓ Loaded $count secrets from $env_file"
+    echo "⚠ Remember to delete $env_file after loading for security!"
+}
+
 # Function to initialize common secrets
 secrets_init() {
     echo "Initializing development secrets..."
+    
+    # Check for .env file and offer to load it
+    if [[ -f ".env" ]]; then
+        echo "📁 Found .env file"
+        read -p "Load secrets from .env? (y/n): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            secrets_load_env ".env"
+        fi
+    fi
     
     # Check for required secrets
     local required_secrets=(
@@ -123,6 +163,15 @@ secrets_auto_export() {
     # GitHub Token
     if value=$(secret_get "GITHUB_TOKEN" 2>/dev/null); then
         export GITHUB_TOKEN="$value"
+    fi
+    
+    # Spotify credentials
+    if value=$(secret_get "SPOTIFY_CLIENT_ID" 2>/dev/null); then
+        export SPOTIFY_CLIENT_ID="$value"
+    fi
+    
+    if value=$(secret_get "SPOTIFY_CLIENT_SECRET" 2>/dev/null); then
+        export SPOTIFY_CLIENT_SECRET="$value"
     fi
     
     # Add more auto-exports as needed
@@ -159,6 +208,7 @@ alias sec-list='secret_list'
 alias sec-export='secret_export'
 alias sec-init='secrets_init'
 alias sec-setup='secret_setup'
+alias sec-load='secrets_load_env'
 
 # Auto-export secrets when sourced (optional - comment out if you prefer manual)
 secrets_auto_export

@@ -16,6 +16,12 @@ else
     export DOTFILES_DIR="${DOTFILES_DIR:-${HOME}/Developer/repo/dotfiles}"
 fi
 
+# Load secrets management functions
+SECRETS_FILE="${SCRIPT_DIR}/secrets.sh"
+if [[ -f "$SECRETS_FILE" ]]; then
+    source "$SECRETS_FILE"
+fi
+
 log() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] $*"
 }

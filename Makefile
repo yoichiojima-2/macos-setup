@@ -26,6 +26,7 @@ help:
 	@echo "  make upgrade    - Upgrade all installed packages"
 	@echo "  make clean      - Clean temporary files and Docker"
 	@echo "  make verify     - Verify installation status"
+	@echo "  make secrets    - Initialize secrets management"
 
 .PHONY: all
 all: brew zsh vi code python node docker languages
@@ -86,6 +87,11 @@ clean:
 .PHONY: verify
 verify:
 	@scripts/verify.sh
+
+.PHONY: secrets
+secrets:
+	@echo "🔐 Initializing secrets management..."
+	@source scripts/secrets.sh && secrets_init
 
 .PHONY: reset-test
 reset-test:

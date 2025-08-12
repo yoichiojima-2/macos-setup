@@ -1,2 +1,11 @@
 brew/.installed
 .claude
+
+# Security - never commit secrets
+.env
+.env.local
+.env.production
+.env.staging
+*.key
+*.secret
+*credentials*
