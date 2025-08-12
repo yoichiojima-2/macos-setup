@@ -1,6 +1,6 @@
 # macOS Setup
 
-Automated macOS development environment setup.
+Automated macOS development environment setup with secure secrets management.
 
 ## Purpose
 
@@ -29,6 +29,7 @@ make docker
 - **Editors**: Neovim, VS Code with extensions
 - **Languages**: Python, Node.js, Rust, Java
 - **Containers**: Docker with pre-pulled images
+- **Security**: Keychain-based secrets management
 - **Tools**: CLI utilities, cloud SDKs, AI tools
 
 ## Configuration Files
@@ -52,7 +53,12 @@ This repository uses configuration files from the local `dotfiles` repository:
 - `make verify` - Check installation status
 - `make clean` - Clean temporary files
 
+## Security and Documentation
+
+- **Security Guide**: See [docs/SECURITY.md](docs/SECURITY.md) for secure secrets management
+- **Development Guide**: See [docs/CLAUDE.md](docs/CLAUDE.md) for repository architecture
+
 ## Philosophy
 
-This repository handles macOS-specific system setup and application installation.
+This repository handles macOS-specific system setup, application installation, and security.
 Configuration files are managed separately in the `dotfiles` repository.
