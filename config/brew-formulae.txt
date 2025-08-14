@@ -8,3 +8,4 @@ bat
 eza
 fd
 npm
+minikube
