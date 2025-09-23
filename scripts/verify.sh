@@ -58,7 +58,14 @@ verify_base_tools() {
 verify_editors() {
     echo -e "\n${YELLOW}Editors:${NC}"
     check_command "nvim" "Neovim"
-    check_file "${HOME}/.config/nvim/init.vim" "Neovim configuration"
+    # Check for either init.lua (modern) or init.vim (legacy)
+    if [[ -f "${HOME}/.config/nvim/init.lua" ]]; then
+        echo -e "${GREEN}✓${NC} Neovim configuration (init.lua) exists"
+    elif [[ -f "${HOME}/.config/nvim/init.vim" ]]; then
+        echo -e "${GREEN}✓${NC} Neovim configuration (init.vim) exists"
+    else
+        echo -e "${RED}✗${NC} Neovim configuration not found"
+    fi
     check_command "code" "Visual Studio Code"
 }
 
