@@ -45,8 +45,13 @@ upgrade_npm_packages() {
 upgrade_gcloud() {
     if command_exists gcloud; then
         log "Updating Google Cloud SDK..."
-        yes | gcloud components update
-        success "Google Cloud SDK updated"
+        # Check if gcloud was installed via Homebrew
+        if brew list google-cloud-sdk &>/dev/null; then
+            log "Google Cloud SDK installed via Homebrew, will be updated with brew upgrade"
+        else
+            yes | gcloud components update
+            success "Google Cloud SDK updated"
+        fi
     else
         log "gcloud not found, skipping..."
     fi
