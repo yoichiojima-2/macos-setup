@@ -1,6 +1,0 @@
-python
-rust
-node
-ruby
-golang
-swift

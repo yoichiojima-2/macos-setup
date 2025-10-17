@@ -1,25 +1,19 @@
 # macOS Setup
 
-Automated macOS development environment setup with secure secrets management.
-
-## Purpose
-
-Bootstrap a complete macOS development environment with a single command.
+Automated macOS development environment setup.
 
 ## Quick Start
 
 ```bash
-# Clone this repository
+# Clone and run
 git clone <repo-url> ~/Developer/repo/macos-setup
+cd ~/Developer/repo/macos-setup
 
-# Run complete setup
+# Complete setup
+./setup.sh all
+
+# Or use make
 make all
-
-# Or run individual components
-make brew
-make zsh
-make python
-make docker
 ```
 
 ## Components
@@ -27,38 +21,38 @@ make docker
 - **Homebrew**: Package manager and applications
 - **Shell**: Zsh with Oh My Zsh
 - **Editors**: Neovim, VS Code with extensions
-- **Languages**: Python, Node.js, Rust, Java
+- **Languages**: Python, Node.js
 - **Containers**: Docker with pre-pulled images
-- **Security**: Keychain-based secrets management
-- **Tools**: CLI utilities, cloud SDKs, AI tools
 
-## Configuration Files
+## Usage
 
-This repository uses configuration files from the local `dotfiles` repository:
-- Shell config: `~/Developer/repo/dotfiles/zshrc`
-- Neovim config: `~/Developer/repo/dotfiles/init.vim`
+```bash
+# Install everything
+./setup.sh all
 
-## Available Make Targets
+# Install specific components
+./setup.sh xcode    # Check/install Xcode Command Line Tools
+./setup.sh brew
+./setup.sh zsh
+./setup.sh vi
+./setup.sh code
+./setup.sh python
+./setup.sh node
+./setup.sh docker
 
-- `make all` - Complete setup
-- `make brew` - Install Homebrew and packages
-- `make zsh` - Configure shell
-- `make vi` - Setup Neovim
-- `make code` - Install VS Code and extensions
-- `make python` - Setup Python environment
-- `make node` - Install Node.js
-- `make docker` - Setup Docker
-- `make languages` - Install additional languages
-- `make upgrade` - Update all packages
-- `make verify` - Check installation status
-- `make clean` - Clean temporary files
+# Verify installation
+./verify.sh
+```
 
-## Security and Documentation
+## Configuration
 
-- **Security Guide**: See [docs/SECURITY.md](docs/SECURITY.md) for secure secrets management
-- **Development Guide**: See [docs/CLAUDE.md](docs/CLAUDE.md) for repository architecture
+Edit files in `config/` to customize:
+- `brew-formulae.txt` - Homebrew packages
+- `brew-casks.txt` - Homebrew applications
+- `code-extensions.txt` - VS Code extensions
+- `python-requirements.txt` - Python packages
+- `node-modules.txt` - Global npm packages
+- `docker-images.txt` - Docker images to pull
+- `settings.sh` - Environment variables
 
-## Philosophy
-
-This repository handles macOS-specific system setup, application installation, and security.
-Configuration files are managed separately in the `dotfiles` repository.
+This setup uses dotfiles from `~/Developer/repo/dotfiles` for shell and editor configs.

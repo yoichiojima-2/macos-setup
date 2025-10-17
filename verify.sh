@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$0")/common.sh"
+# Load configuration
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="${SCRIPT_DIR}/config/settings.sh"
+[[ -f "$CONFIG_FILE" ]] && source "$CONFIG_FILE"
 
 # Color codes for output
 GREEN='\033[0;32m'
@@ -8,10 +11,14 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
 check_command() {
     local cmd="$1"
     local name="${2:-$cmd}"
-    
+
     if command_exists "$cmd"; then
         echo -e "${GREEN}✓${NC} $name is installed"
         return 0
