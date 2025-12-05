@@ -149,7 +149,7 @@ install_vscode() {
         log "Installing VS Code extensions..."
         while IFS= read -r ext || [[ -n "$ext" ]]; do
             [[ -z "$ext" || "$ext" =~ ^# ]] && continue
-            code --install-extension "$ext" || true
+            code --install-extension --force "$ext" || true
         done < "${SCRIPT_DIR}/config/code-extensions.txt"
     fi
 
